@@ -1,7 +1,7 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Navbar from "./global/Navbar";
-// import AddNotes from "./scenes/AddNotes/AddNotes";
+import AddNotes from "./scenes/AddNotes/AddNotes";
 // import Notes from "./scenes/Notes/Notes";
 // import Trash from "./scenes/Trash/Trash";
 // import Favourite from "./scenes/Favourite/Favourite";
@@ -14,11 +14,11 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
+          <Navbar />
           <main className="content">
-            <Navbar />
             <Routes>
-              {/* <Route path="/add" element={<AddNotes />} />
-              <Route path="/notes" ement={<Notes />} />
+              <Route path="/add" element={<AddNotes />} />
+              {/* <Route path="/notes" element={<Notes />} />
               <Route path="/trash" element={<Trash />} />
               <Route path="/favourite" element={<Favourite />} /> */}
             </Routes>

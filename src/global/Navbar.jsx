@@ -16,17 +16,18 @@ const Item = ({ title, to, icon, isSelected, setIsSelected }) => {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <MenuItem
-      style={{
-        margin: "10px 0 10px 0",
-      }}
-      active={isSelected === title}
-      onClick={() => setIsSelected(title)}
-      icon={icon}
-    >
-      <Typography variant="h5">{title}</Typography>
-      <Link to={to} />
-    </MenuItem>
+    <Link to={to}>
+      <MenuItem
+        style={{
+          margin: "10px 0 10px 0",
+        }}
+        active={isSelected === title}
+        onClick={() => setIsSelected(title)}
+        icon={icon}
+      >
+        <Typography variant="h5">{title}</Typography>
+      </MenuItem>
+    </Link>
   );
 };
 
@@ -37,13 +38,13 @@ const Navbar = () => {
   const [isSelected, setIsSelected] = useState("home");
 
   return (
-    <Box width="100%" height="100vh" display="flex">
+    <Box height="100vh" display="flex">
       <Sidebar collapsed={isCollapsed} backgroundColor={colors.primary[400]}>
         <Box
           display="flex"
           flexDirection="column"
           height="100%"
-          justifyContent="space-between" // Kluczowy element
+          justifyContent="space-between"
         >
           <Menu
             iconShape="square"
@@ -56,7 +57,7 @@ const Navbar = () => {
               },
             }}
           >
-            {/* LOGO & IKONA */}
+            {/* LOGO & ICON */}
             <MenuItem
               onClick={() => setIsCollapsed(!isCollapsed)}
               icon={isCollapsed ? <ArrowForwardIcon /> : undefined}
@@ -115,7 +116,7 @@ const Navbar = () => {
               />
             </Box>
           </Menu>
-          {/* PRZYCISK PRZEŁĄCZANIA MOTYWU NA DOLE */}
+          {/* THEME SWITCH */}
           <Menu
             rootStyles={{
               ["." + menuClasses.button]: {
@@ -127,7 +128,7 @@ const Navbar = () => {
             }}
             iconShape="square"
             style={{
-              marginBottom: "10px", // Mała odległość od dolnej krawędzi
+              marginBottom: "10px",
             }}
           >
             <MenuItem
