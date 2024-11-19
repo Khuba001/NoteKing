@@ -110,9 +110,9 @@ const Navbar = () => {
               <Item
                 isSelected={isSelected}
                 setIsSelected={setIsSelected}
-                title={"Favourite"}
+                title={"Important"}
                 icon={<FavoriteBorderIcon />}
-                to={"/favourite"}
+                to={"/important"}
               />
             </Box>
           </Menu>

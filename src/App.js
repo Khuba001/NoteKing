@@ -4,7 +4,7 @@ import Navbar from "./global/Navbar";
 import AddNotes from "./scenes/AddNotes/AddNotes";
 // import Notes from "./scenes/Notes/Notes";
 // import Trash from "./scenes/Trash/Trash";
-// import Favourite from "./scenes/Favourite/Favourite";
+// import Important from "./scenes/Important/Important";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
               <Route path="/add" element={<AddNotes />} />
               {/* <Route path="/notes" element={<Notes />} />
               <Route path="/trash" element={<Trash />} />
-              <Route path="/favourite" element={<Favourite />} /> */}
+              <Route path="/important" element={<Important />} /> */}
             </Routes>
           </main>
         </div>
