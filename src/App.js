@@ -2,9 +2,9 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Navbar from "./global/Navbar";
 import AddNotes from "./scenes/AddNotes/AddNotes";
-// import Notes from "./scenes/Notes/Notes";
-// import Trash from "./scenes/Trash/Trash";
-// import Important from "./scenes/Important/Important";
+import Notes from "./scenes/Notes/Notes";
+import Trash from "./scenes/Trash/Trash";
+import Important from "./scenes/Important/Important";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -18,9 +18,9 @@ function App() {
           <main className="content">
             <Routes>
               <Route path="/add" element={<AddNotes />} />
-              {/* <Route path="/notes" element={<Notes />} />
+              <Route path="/notes" element={<Notes />} />
               <Route path="/trash" element={<Trash />} />
-              <Route path="/important" element={<Important />} /> */}
+              <Route path="/important" element={<Important />} />
             </Routes>
           </main>
         </div>

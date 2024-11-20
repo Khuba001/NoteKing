@@ -16,18 +16,18 @@ const Item = ({ title, to, icon, isSelected, setIsSelected }) => {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Link to={to}>
-      <MenuItem
-        style={{
-          margin: "10px 0 10px 0",
-        }}
-        active={isSelected === title}
-        onClick={() => setIsSelected(title)}
-        icon={icon}
-      >
-        <Typography variant="h5">{title}</Typography>
-      </MenuItem>
-    </Link>
+    <MenuItem
+      component={<Link />}
+      to={to}
+      style={{
+        margin: "10px 0 10px 0",
+      }}
+      active={isSelected === title}
+      onClick={() => setIsSelected(title)}
+      icon={icon}
+    >
+      <Typography variant="h5">{title}</Typography>
+    </MenuItem>
   );
 };
 

@@ -1,11 +1,11 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 
-function Header({ title, subheading, align }) {
+function Header({ title, subheading }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
-    <Box mb="30px" alignSelf={align}>
+    <Box mb="30px">
       <Typography
         variant="h2"
         color={colors.grey[100]}
