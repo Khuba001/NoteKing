@@ -2,16 +2,22 @@
 
 html,
 body,
-#root,
-.app.content {
+#root {
   height: 100%;
-  height: 100%;
+  width: 100%;
   font-family: "Source Sans 3", sans-serif;
 }
 
 .app {
   display: flex;
   position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.app .content {
+  flex-grow: 1;
+  padding: 128px;
 }
 
 ::-webkit-scrollbar {

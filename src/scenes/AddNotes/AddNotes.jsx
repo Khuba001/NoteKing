@@ -7,13 +7,20 @@ import {
   MenuItem,
   Checkbox,
   Snackbar,
+  FormControl,
+  FormLabel,
+  InputLabel,
 } from "@mui/material";
 import Header from "../../components/Header/Header";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { tokens } from "../../theme";
 import { useTheme } from "@emotion/react";
-import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import {
+  Favorite,
+  FavoriteBorder,
+  SearchOffOutlined,
+} from "@mui/icons-material";
 import { useState } from "react";
 
 const initialValues = {
@@ -71,7 +78,7 @@ const AddNotes = () => {
           handleSubmit,
         }) => (
           <form onSubmit={handleSubmit}>
-            <Box display="flex" flexDirection="column" gap="1rem" width="400px">
+            <Box display="flex" flexDirection="column" gap="1rem">
               <TextField
                 variant="filled"
                 type="text"
@@ -96,23 +103,27 @@ const AddNotes = () => {
                 multiline
                 rows={3}
               />
-              <label style={{ color: `${colors.grey[100]}` }}>Category</label>
-              <Select
-                fullWidth
-                variant="filled"
-                name="category"
-                value={values.category || "life"}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={!!touched.category && !!errors.category}
-              >
-                <MenuItem value="shopping">Shopping</MenuItem>
-                <MenuItem value="life">Life</MenuItem>
-                <MenuItem value="traveling">Traveling</MenuItem>
-                <MenuItem value="school">School</MenuItem>
-                <MenuItem value="work">Work</MenuItem>
-                <MenuItem value="hobby">Hobby</MenuItem>
-              </Select>
+              <FormControl>
+                <InputLabel id="select-label">Category</InputLabel>
+                <Select
+                  labelId="select-label"
+                  label="Category"
+                  fullWidth
+                  variant="filled"
+                  name="category"
+                  value={values.category || "life"}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={!!touched.category && !!errors.category}
+                >
+                  <MenuItem value="shopping">Shopping</MenuItem>
+                  <MenuItem value="life">Life</MenuItem>
+                  <MenuItem value="traveling">Traveling</MenuItem>
+                  <MenuItem value="school">School</MenuItem>
+                  <MenuItem value="work">Work</MenuItem>
+                  <MenuItem value="hobby">Hobby</MenuItem>
+                </Select>
+              </FormControl>
               <Checkbox
                 style={{ backgroundColor: "transparent" }}
                 icon={<FavoriteBorder />}
@@ -130,6 +141,7 @@ const AddNotes = () => {
                 type="submit"
                 color="secondary"
                 variant="contained"
+                sx={{ width: "10%" }}
               >
                 Add New Note
               </Button>
