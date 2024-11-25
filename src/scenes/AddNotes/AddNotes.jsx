@@ -77,7 +77,15 @@ const AddNotes = () => {
           handleChange,
           handleSubmit,
         }) => (
-          <form onSubmit={handleSubmit}>
+          <form
+            onSubmit={handleSubmit}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginTop: "64px",
+            }}
+          >
             <Box
               display="flex"
               flexDirection="column"
@@ -140,7 +148,12 @@ const AddNotes = () => {
                 name="isImportant"
               />
             </Box>
-            <Box display="flex" justifyContent="center" mt="0.5rem">
+            <Box
+              display="flex"
+              justifyContent="center"
+              mt="0.5rem"
+              width="100%"
+            >
               <Button
                 fullWidth
                 type="submit"
