@@ -5,80 +5,20 @@ import {
   InputAdornment,
   InputLabel,
   MenuItem,
+  Pagination,
   Select,
   TextField,
-  Typography,
   useTheme,
 } from "@mui/material";
 import Header from "../../components/Header/Header";
 import { tokens } from "../../theme";
 import { SearchOutlined } from "@mui/icons-material";
-
-function NoteItem() {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-
-  return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      width="80%"
-      border="1px solid #7777"
-      borderRadius="9px"
-      padding="20px 16px"
-      gap="24px"
-      mt="56px"
-    >
-      <Box display="flex" gap="9px" alignItems="center">
-        <Typography variant="h4">Guest</Typography>
-
-        <Typography
-          variant="h5"
-          borderLeft="1px solid #7777 "
-          paddingLeft="10px"
-        >
-          Note1
-        </Typography>
-      </Box>
-      <Box
-        border="1px solid #7777"
-        borderRadius="9px"
-        display="flex"
-        flexDirection="column"
-        padding="14px"
-        gap="4px"
-      >
-        <Typography variant="h5" color={colors.grey[300]}>
-          Shopping
-        </Typography>
-        <Typography>dsadakdsadkokd</Typography>
-      </Box>
-      <Box display="flex" gap="14px">
-        <Button
-          color="secondary"
-          variant="contained"
-          size="medium"
-          type="button"
-        >
-          Details
-        </Button>
-        <Button
-          color="secondary"
-          variant="outlined"
-          size="medium"
-          type="button"
-        >
-          Delete
-        </Button>
-      </Box>
-    </Box>
-  );
-}
+import NoteItem from "../../components/NoteItem/NoteItem";
 
 function Notes() {
   return (
-    <Box>
-      <Box>
+    <Box display="flex" flexDirection="column">
+      <Box mb="32px">
         <Header title={"NOTES"} subheading={"Browse all your notes"} />
         <form>
           <Box display="flex" alignItems="center" gap="14px" padding="0 81px">
@@ -130,12 +70,41 @@ function Notes() {
           justifyItems="center"
           alignContent="center"
         >
-          <NoteItem />
-          <NoteItem />
-          <NoteItem />
-          <NoteItem />
+          <NoteItem
+            name={"Guest"}
+            title={"Note1"}
+            category={"shopping"}
+            description={"cos tam cos tam siema neiu"}
+            btn1={"DETAILS"}
+            btn2={"DELETE"}
+          />
+          <NoteItem
+            name={"Guest"}
+            title={"Note1"}
+            category={"shopping"}
+            description={"cos tam cos tam siema neiu"}
+            btn1={"DETAILS"}
+            btn2={"DELETE"}
+          />
+          <NoteItem
+            name={"Guest"}
+            title={"Note1"}
+            category={"shopping"}
+            description={"cos tam cos tam siema neiu"}
+            btn1={"DETAILS"}
+            btn2={"DELETE"}
+          />
+          <NoteItem
+            name={"Guest"}
+            title={"Note1"}
+            category={"shopping"}
+            description={"cos tam cos tam siema neiu"}
+            btn1={"DETAILS"}
+            btn2={"DELETE"}
+          />
         </Box>
       </Box>
+      <Pagination siblingCount={0} count={4} sx={{ alignSelf: "center" }} />
     </Box>
   );
 }

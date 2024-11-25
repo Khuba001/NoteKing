@@ -59,7 +59,7 @@ const AddNotes = () => {
   };
 
   return (
-    <Box m="20px" display="flex" minHeight="100vh" flexDirection="column">
+    <Box display="flex" flexDirection="column">
       <Header
         title={"ADD NOTES"}
         subheading={"You can write your notes here!"}
@@ -78,7 +78,12 @@ const AddNotes = () => {
           handleSubmit,
         }) => (
           <form onSubmit={handleSubmit}>
-            <Box display="flex" flexDirection="column" gap="1rem">
+            <Box
+              display="flex"
+              flexDirection="column"
+              gap="2rem"
+              sx={{ width: "50%" }}
+            >
               <TextField
                 variant="filled"
                 type="text"

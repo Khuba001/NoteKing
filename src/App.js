@@ -6,6 +6,7 @@ import Notes from "./scenes/Notes/Notes";
 import Trash from "./scenes/Trash/Trash";
 import Important from "./scenes/Important/Important";
 import { Route, Routes } from "react-router-dom";
+import Note from "./scenes/SingleNote/Note";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -19,6 +20,7 @@ function App() {
             <Routes>
               <Route path="/add" element={<AddNotes />} />
               <Route path="/notes" element={<Notes />} />
+              <Route path="/notes/:noteId/" element={<Note />} />
               <Route path="/trash" element={<Trash />} />
               <Route path="/important" element={<Important />} />
             </Routes>

@@ -17,7 +17,7 @@ body,
 
 .app .content {
   flex-grow: 1;
-  padding: 128px;
+  padding: 96px 128px;
 }
 
 ::-webkit-scrollbar {
