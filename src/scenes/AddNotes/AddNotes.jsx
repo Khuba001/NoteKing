@@ -52,6 +52,7 @@ const AddNotes = () => {
 
     setNotes((notes) => [...notes, newNote]);
     setSnackbarOpen(true);
+    console.log(theme);
   };
 
   const handleSnackbarClose = () => {
@@ -83,14 +84,18 @@ const AddNotes = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              marginTop: "64px",
+              marginTop: "48px",
             }}
           >
             <Box
               display="flex"
               flexDirection="column"
               gap="2rem"
-              sx={{ width: "50%" }}
+              sx={{ width: "50%", backgroundColor: colors.primary[400] }}
+              border="1px solid #7777"
+              borderRadius="9px"
+              padding="20px 16px
+              "
             >
               <TextField
                 variant="filled"
@@ -148,18 +153,13 @@ const AddNotes = () => {
                 name="isImportant"
               />
             </Box>
-            <Box
-              display="flex"
-              justifyContent="center"
-              mt="0.5rem"
-              width="100%"
-            >
+            <Box display="flex" justifyContent="center" mt="32px" width="100%">
               <Button
                 fullWidth
                 type="submit"
                 color="secondary"
                 variant="contained"
-                sx={{ width: "10%" }}
+                sx={{ width: "10%", padding: "16px 16px" }}
               >
                 Add New Note
               </Button>

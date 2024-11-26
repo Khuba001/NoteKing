@@ -7,9 +7,10 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useState } from "react";
-import { tokens } from "../theme";
+import { useContext, useState } from "react";
+import { ColorModeContext, tokens } from "../theme";
 import { Sidebar, Menu, MenuItem, menuClasses } from "react-pro-sidebar";
+import { DarkModeOutlined, LightModeOutlined } from "@mui/icons-material";
 
 const Item = ({ title, to, icon, isSelected, setIsSelected }) => {
   const theme = useTheme();
@@ -34,8 +35,10 @@ const Item = ({ title, to, icon, isSelected, setIsSelected }) => {
 const Navbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const colorMode = useContext(ColorModeContext);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isSelected, setIsSelected] = useState("home");
+  console.log(colorMode);
 
   return (
     <Box height="100vh" display="flex">
@@ -132,7 +135,15 @@ const Navbar = () => {
             }}
           >
             <MenuItem
-              icon={isCollapsed ? <LightModeOutlinedIcon /> : undefined}
+              icon={
+                isCollapsed ? (
+                  theme.palette.mode === "light" ? (
+                    <LightModeOutlinedIcon />
+                  ) : (
+                    <DarkModeOutlined />
+                  )
+                ) : undefined
+              }
             >
               {!isCollapsed && (
                 <Box
@@ -141,8 +152,12 @@ const Navbar = () => {
                   alignItems="center"
                   ml="15px"
                 >
-                  <LightModeOutlinedIcon />
-                  <Switch />
+                  {theme.palette.mode === "light" ? (
+                    <LightModeOutlinedIcon />
+                  ) : (
+                    <DarkModeOutlined />
+                  )}
+                  <Switch onChange={colorMode.toggleColorMode} />
                 </Box>
               )}
             </MenuItem>

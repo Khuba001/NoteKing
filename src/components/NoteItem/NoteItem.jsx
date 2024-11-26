@@ -58,24 +58,28 @@ function NoteItem({
         <Typography>{description}</Typography>
       </Box>
       <Box display="flex" gap="14px">
-        <Button
-          color="secondary"
-          variant="contained"
-          size="medium"
-          type="button"
-          onClick={OnClickBtn1}
-        >
-          {btn1}
-        </Button>
-        <Button
-          color="secondary"
-          variant="outlined"
-          size="medium"
-          type="button"
-          onClick={OnClickBtn2}
-        >
-          {btn2}
-        </Button>
+        {btn1 && (
+          <Button
+            color="secondary"
+            variant="contained"
+            size="medium"
+            type="button"
+            onClick={OnClickBtn1}
+          >
+            {btn1}
+          </Button>
+        )}
+        {btn2 && (
+          <Button
+            color="secondary"
+            variant="outlined"
+            size="medium"
+            type="button"
+            onClick={OnClickBtn2}
+          >
+            {btn2}
+          </Button>
+        )}
       </Box>
     </Box>
   );
