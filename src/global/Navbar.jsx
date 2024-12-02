@@ -38,7 +38,6 @@ const Navbar = () => {
   const colorMode = useContext(ColorModeContext);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isSelected, setIsSelected] = useState("home");
-  console.log(colorMode);
 
   return (
     <Box height="100vh" display="flex">

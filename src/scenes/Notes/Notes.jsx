@@ -14,14 +14,16 @@ import Header from "../../components/Header/Header";
 import { tokens } from "../../theme";
 import { SearchOutlined } from "@mui/icons-material";
 import NoteItem from "../../components/NoteItem/NoteItem";
+import { useState } from "react";
+import useLocalStorageState from "../../hooks/useLocalStorageState";
 
-function Notes() {
+function Notes({ notesData }) {
   return (
     <Box display="flex" flexDirection="column">
       <Box mb="32px">
         <Header title={"NOTES"} subheading={"Browse all your notes"} />
         <form>
-          <Box display="flex" alignItems="center" gap="14px" padding="0 81px">
+          <Box display="flex" alignItems="center" gap="24px" padding="0 81px">
             <TextField
               fullWidth
               variant="filled"
@@ -70,38 +72,16 @@ function Notes() {
           justifyItems="center"
           alignContent="center"
         >
-          <NoteItem
-            name={"Guest"}
-            title={"Note1"}
-            category={"shopping"}
-            description={"cos tam cos tam siema neiu"}
-            btn1={"DETAILS"}
-            btn2={"DELETE"}
-          />
-          <NoteItem
-            name={"Guest"}
-            title={"Note1"}
-            category={"shopping"}
-            description={"cos tam cos tam siema neiu"}
-            btn1={"DETAILS"}
-            btn2={"DELETE"}
-          />
-          <NoteItem
-            name={"Guest"}
-            title={"Note1"}
-            category={"shopping"}
-            description={"cos tam cos tam siema neiu"}
-            btn1={"DETAILS"}
-            btn2={"DELETE"}
-          />
-          <NoteItem
-            name={"Guest"}
-            title={"Note1"}
-            category={"shopping"}
-            description={"cos tam cos tam siema neiu"}
-            btn1={"DETAILS"}
-            btn2={"DELETE"}
-          />
+          {notesData.map((item) => (
+            <NoteItem
+              name={"Guest"}
+              title={item.title}
+              category={item.category}
+              description={item.description}
+              btn1={"DETAILS"}
+              btn2={"DELETE"}
+            />
+          ))}{" "}
         </Box>
       </Box>
       <Pagination siblingCount={0} count={4} sx={{ alignSelf: "center" }} />

@@ -7,9 +7,12 @@ import Trash from "./scenes/Trash/Trash";
 import Important from "./scenes/Important/Important";
 import { Route, Routes } from "react-router-dom";
 import Note from "./scenes/SingleNote/Note";
+import useLocalStorageState from "./hooks/useLocalStorageState";
 
 function App() {
   const [theme, colorMode] = useMode();
+  const [notesData, setNotesData] = useLocalStorageState([], "notes");
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
@@ -18,8 +21,13 @@ function App() {
           <Navbar />
           <main className="content">
             <Routes>
-              <Route path="/add" element={<AddNotes />} />
-              <Route path="/notes" element={<Notes />} />
+              <Route
+                path="/add"
+                element={
+                  <AddNotes notesData={notesData} setNotesData={setNotesData} />
+                }
+              />
+              <Route path="/notes" element={<Notes notesData={notesData} />} />
               <Route path="/notes/:noteId/" element={<Note />} />
               <Route path="/trash" element={<Trash />} />
               <Route path="/important" element={<Important />} />

@@ -36,23 +36,20 @@ const noteSchema = yup.object().shape({
   category: yup.string().required("required"),
 });
 
-const AddNotes = () => {
+const AddNotes = ({ notesData, setNotesData }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [notes, setNotes] = useState([]);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-  console.log(notes);
   const handleFormSubmit = (values) => {
     const newNote = {
       ...values,
       id: crypto.randomUUID(),
     };
 
-    setNotes((notes) => [...notes, newNote]);
+    setNotesData((notesData) => [...notesData, newNote]);
     setSnackbarOpen(true);
-    console.log(theme);
   };
 
   const handleSnackbarClose = () => {
