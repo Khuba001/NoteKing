@@ -42,13 +42,14 @@ const AddNotes = ({ notesData, setNotesData }) => {
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = (values, { resetForm }) => {
     const newNote = {
       ...values,
       id: crypto.randomUUID(),
     };
 
     setNotesData((notesData) => [...notesData, newNote]);
+    resetForm();
     setSnackbarOpen(true);
   };
 
@@ -145,7 +146,14 @@ const AddNotes = ({ notesData, setNotesData }) => {
                 checkedIcon={<Favorite />}
                 color="default"
                 checked={values.isImportant}
-                onChange={handleChange}
+                onChange={(event) =>
+                  handleChange({
+                    target: {
+                      name: "isImportant",
+                      value: event.target.checked,
+                    },
+                  })
+                }
                 onBlur={handleBlur}
                 name="isImportant"
               />

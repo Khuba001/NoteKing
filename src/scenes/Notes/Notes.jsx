@@ -15,9 +15,22 @@ import { tokens } from "../../theme";
 import { SearchOutlined } from "@mui/icons-material";
 import NoteItem from "../../components/NoteItem/NoteItem";
 import { useState } from "react";
-import useLocalStorageState from "../../hooks/useLocalStorageState";
 
-function Notes({ notesData }) {
+function Notes({ notesData, setNotesData }) {
+  const [query, setQuery] = useState("");
+
+  const filteredNotes = notesData.filter((note) =>
+    note.title.toLowerCase().includes(query.toLowerCase())
+  );
+  function handleDeleteNote(id) {
+    const newNotesArray = notesData.filter((note) => note.id !== id);
+    setNotesData(newNotesArray);
+  }
+
+  function handleDeleteAll() {
+    setNotesData([]);
+  }
+
   return (
     <Box display="flex" flexDirection="column">
       <Box mb="32px">
@@ -26,6 +39,7 @@ function Notes({ notesData }) {
           <Box display="flex" alignItems="center" gap="24px" padding="0 81px">
             <TextField
               fullWidth
+              onChange={(e) => setQuery(e.target.value)}
               variant="filled"
               type="text"
               label="Search"
@@ -48,6 +62,7 @@ function Notes({ notesData }) {
                 label="Sort by"
                 variant="filled"
                 name="sort"
+                value="normal"
               >
                 <MenuItem value="normal">Normal</MenuItem>
                 <MenuItem value="favouites">Favourites</MenuItem>
@@ -60,6 +75,7 @@ function Notes({ notesData }) {
               fullWidth
               variant="contained"
               size="large"
+              onClick={handleDeleteAll}
               sx={{ width: "10%" }}
             >
               Trash all
@@ -72,7 +88,7 @@ function Notes({ notesData }) {
           justifyItems="center"
           alignContent="center"
         >
-          {notesData.map((item) => (
+          {filteredNotes.map((item) => (
             <NoteItem
               name={"Guest"}
               title={item.title}
@@ -80,6 +96,8 @@ function Notes({ notesData }) {
               description={item.description}
               btn1={"DETAILS"}
               btn2={"DELETE"}
+              OnClickBtn2={() => handleDeleteNote(item.id)}
+              key={item.id}
             />
           ))}{" "}
         </Box>

@@ -27,7 +27,12 @@ function App() {
                   <AddNotes notesData={notesData} setNotesData={setNotesData} />
                 }
               />
-              <Route path="/notes" element={<Notes notesData={notesData} />} />
+              <Route
+                path="/notes"
+                element={
+                  <Notes notesData={notesData} setNotesData={setNotesData} />
+                }
+              />
               <Route path="/notes/:noteId/" element={<Note />} />
               <Route path="/trash" element={<Trash />} />
               <Route path="/important" element={<Important />} />
