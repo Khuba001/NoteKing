@@ -15,8 +15,10 @@ import { tokens } from "../../theme";
 import { SearchOutlined } from "@mui/icons-material";
 import NoteItem from "../../components/NoteItem/NoteItem";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Notes({ notesData, setNotesData }) {
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
 
   const filteredNotes = notesData.filter((note) =>
@@ -29,6 +31,10 @@ function Notes({ notesData, setNotesData }) {
 
   function handleDeleteAll() {
     setNotesData([]);
+  }
+
+  function handleNavigate(id) {
+    navigate(`/notes/${id}`);
   }
 
   return (
@@ -97,6 +103,7 @@ function Notes({ notesData, setNotesData }) {
               btn1={"DETAILS"}
               btn2={"DELETE"}
               OnClickBtn2={() => handleDeleteNote(item.id)}
+              OnClickBtn1={() => handleNavigate(item.id)}
               key={item.id}
             />
           ))}{" "}

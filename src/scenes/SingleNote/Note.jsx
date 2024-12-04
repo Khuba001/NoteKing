@@ -4,8 +4,9 @@ import Header from "../../components/Header/Header";
 import NoteItem from "../../components/NoteItem/NoteItem";
 import { useTheme } from "@emotion/react";
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-function NoteDetails() {
+function NoteDetails({ notesData }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -32,9 +33,7 @@ function NoteDetails() {
           {/* SINGLE ROW */}
           <Box>
             <Typography variant="h5">Created At</Typography>
-            <Typography variant="h6" color={colors.grey[300]}>
-              25/11/2024
-            </Typography>
+            <Typography variant="h6" color={colors.grey[300]}></Typography>
           </Box>
         </Box>
       </Box>
@@ -42,11 +41,19 @@ function NoteDetails() {
   );
 }
 
-function Note() {
+function Note({ notesData }) {
+  const navigate = useNavigate();
+  let { noteId } = useParams();
+  const currentNote = notesData.find((note) => note.id === noteId);
+  console.log(notesData);
   const [theme, colorMode] = useMode();
   const colors = tokens(theme.palette.mode);
 
   const [openEdit, setOpenEdit] = useState(false);
+
+  function handleBack() {
+    navigate("/notes");
+  }
 
   function handleEditMode() {
     setOpenEdit((openEdit) => !openEdit);
@@ -59,10 +66,11 @@ function Note() {
 
         <NoteItem
           name={"Guest"}
-          title={"Note1"}
-          category={"shopping"}
-          description={"cos tam cos tam siema neiu"}
+          title={currentNote.title}
+          category={currentNote.category}
+          description={currentNote.description}
           btn1={"BACK"}
+          OnClickBtn1={handleBack}
           btn2={openEdit ? "SAVE" : "EDIT"}
           size={1.2}
           OnClickBtn2={handleEditMode}

@@ -46,6 +46,7 @@ const AddNotes = ({ notesData, setNotesData }) => {
     const newNote = {
       ...values,
       id: crypto.randomUUID(),
+      createdAt: new Date(),
     };
 
     setNotesData((notesData) => [...notesData, newNote]);

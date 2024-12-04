@@ -1,8 +1,17 @@
 import { Box } from "@mui/material";
 import Header from "../../components/Header/Header";
 import NoteItem from "../../components/NoteItem/NoteItem";
+import { useState } from "react";
 
-function Important() {
+function Important({ notesData, setNotesData }) {
+  const favouriteNotes = notesData.filter((note) => note.isImportant);
+  function handleUnfavourite(id) {
+    const newNotes = notesData.map((note) =>
+      note.id === id ? { ...note, isImportant: false } : note
+    );
+    setNotesData(newNotes);
+  }
+
   return (
     <Box>
       <Header
@@ -15,13 +24,17 @@ function Important() {
         justifyItems="center"
         alignContent="center"
       >
-        <NoteItem
-          name={"Guest"}
-          title={"Note1"}
-          category={"shopping"}
-          description={"cos tam cos tam siema neiu"}
-          btn1={"UNFAVOURITE"}
-        />
+        {favouriteNotes.map((note) => (
+          <NoteItem
+            name={"Guest"}
+            title={note.title}
+            category={note.category}
+            description={note.description}
+            key={note.id}
+            OnClickBtn1={() => handleUnfavourite(note.id)}
+            btn1={"UNFAVOURITE"}
+          />
+        ))}
       </Box>
     </Box>
   );

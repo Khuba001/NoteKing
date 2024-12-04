@@ -33,9 +33,20 @@ function App() {
                   <Notes notesData={notesData} setNotesData={setNotesData} />
                 }
               />
-              <Route path="/notes/:noteId/" element={<Note />} />
+              <Route
+                path="/notes/:noteId/"
+                element={<Note notesData={notesData} />}
+              />
               <Route path="/trash" element={<Trash />} />
-              <Route path="/important" element={<Important />} />
+              <Route
+                path="/important"
+                element={
+                  <Important
+                    notesData={notesData}
+                    setNotesData={setNotesData}
+                  />
+                }
+              />
             </Routes>
           </main>
         </div>
