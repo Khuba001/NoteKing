@@ -12,6 +12,7 @@ function NoteItem({
   size = 1,
   OnClickBtn1,
   OnClickBtn2,
+  isTrashed,
 }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);

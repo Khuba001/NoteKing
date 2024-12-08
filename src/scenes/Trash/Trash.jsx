@@ -1,8 +1,19 @@
 import { Box } from "@mui/material";
 import Header from "../../components/Header/Header";
 import NoteItem from "../../components/NoteItem/NoteItem";
+import { useState } from "react";
 
-function Trash() {
+function Trash({ notesData, setNotesData }) {
+  function handleUndo(id) {
+    setNotesData(
+      notesData.map((note) =>
+        note.id === id ? { ...note, isTrashed: false } : note
+      )
+    );
+  }
+  function handleRemovePerm(id) {
+    setNotesData(notesData.filter((note) => note.id !== id));
+  }
   return (
     <Box>
       <Header title={"TRASH"} subheading={"Bring Back Your Deleted Notes"} />
@@ -12,38 +23,22 @@ function Trash() {
         justifyItems="center"
         alignContent="center"
       >
-        <NoteItem
-          name={"Guest"}
-          title={"Note1"}
-          category={"shopping"}
-          description={"cos tam cos tam siema neiu"}
-          btn1={"UNDO"}
-          btn2={"REMOVE"}
-        />
-        <NoteItem
-          name={"Guest"}
-          title={"Note1"}
-          category={"shopping"}
-          description={"cos tam cos tam siema neiu"}
-          btn1={"UNDO"}
-          btn2={"REMOVE"}
-        />
-        <NoteItem
-          name={"Guest"}
-          title={"Note1"}
-          category={"shopping"}
-          description={"cos tam cos tam siema neiu"}
-          btn1={"UNDO"}
-          btn2={"REMOVE"}
-        />
-        <NoteItem
-          name={"Guest"}
-          title={"Note1"}
-          category={"shopping"}
-          description={"cos tam cos tam siema neiu"}
-          btn1={"UNDO"}
-          btn2={"REMOVE"}
-        />
+        {notesData.map(
+          (item) =>
+            item.isTrashed && (
+              <NoteItem
+                name={"Guest"}
+                title={item.title}
+                category={item.category}
+                description={item.description}
+                btn1={"UNDO"}
+                OnClickBtn1={() => handleUndo(item.id)}
+                btn2={"REMOVE"}
+                OnClickBtn2={() => handleRemovePerm(item.id)}
+                key={item.id}
+              />
+            )
+        )}
       </Box>
     </Box>
   );

@@ -25,12 +25,17 @@ function Notes({ notesData, setNotesData }) {
     note.title.toLowerCase().includes(query.toLowerCase())
   );
   function handleDeleteNote(id) {
-    const newNotesArray = notesData.filter((note) => note.id !== id);
-    setNotesData(newNotesArray);
+    setNotesData((notesData) =>
+      notesData.map((note) =>
+        note.id === id ? { ...note, isTrashed: true } : note
+      )
+    );
   }
 
   function handleDeleteAll() {
-    setNotesData([]);
+    setNotesData((notesData) =>
+      notesData.map((note) => ({ ...note, isTrashed: true }))
+    );
   }
 
   function handleNavigate(id) {
@@ -94,19 +99,22 @@ function Notes({ notesData, setNotesData }) {
           justifyItems="center"
           alignContent="center"
         >
-          {filteredNotes.map((item) => (
-            <NoteItem
-              name={"Guest"}
-              title={item.title}
-              category={item.category}
-              description={item.description}
-              btn1={"DETAILS"}
-              btn2={"DELETE"}
-              OnClickBtn2={() => handleDeleteNote(item.id)}
-              OnClickBtn1={() => handleNavigate(item.id)}
-              key={item.id}
-            />
-          ))}{" "}
+          {filteredNotes.map(
+            (item) =>
+              !item.isTrashed && (
+                <NoteItem
+                  name={"Guest"}
+                  title={item.title}
+                  category={item.category}
+                  description={item.description}
+                  btn1={"DETAILS"}
+                  btn2={"DELETE"}
+                  OnClickBtn2={() => handleDeleteNote(item.id)}
+                  OnClickBtn1={() => handleNavigate(item.id)}
+                  key={item.id}
+                />
+              )
+          )}{" "}
         </Box>
       </Box>
       <Pagination siblingCount={0} count={4} sx={{ alignSelf: "center" }} />

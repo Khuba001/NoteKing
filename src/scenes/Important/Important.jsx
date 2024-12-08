@@ -24,17 +24,20 @@ function Important({ notesData, setNotesData }) {
         justifyItems="center"
         alignContent="center"
       >
-        {favouriteNotes.map((note) => (
-          <NoteItem
-            name={"Guest"}
-            title={note.title}
-            category={note.category}
-            description={note.description}
-            key={note.id}
-            OnClickBtn1={() => handleUnfavourite(note.id)}
-            btn1={"UNFAVOURITE"}
-          />
-        ))}
+        {favouriteNotes.map(
+          (note) =>
+            !note.isTrashed && (
+              <NoteItem
+                name={"Guest"}
+                title={note.title}
+                category={note.category}
+                description={note.description}
+                key={note.id}
+                OnClickBtn1={() => handleUnfavourite(note.id)}
+                btn1={"UNFAVOURITE"}
+              />
+            )
+        )}
       </Box>
     </Box>
   );

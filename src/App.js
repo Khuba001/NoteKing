@@ -37,7 +37,12 @@ function App() {
                 path="/notes/:noteId/"
                 element={<Note notesData={notesData} />}
               />
-              <Route path="/trash" element={<Trash />} />
+              <Route
+                path="/trash"
+                element={
+                  <Trash notesData={notesData} setNotesData={setNotesData} />
+                }
+              />
               <Route
                 path="/important"
                 element={
