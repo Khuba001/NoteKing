@@ -8,10 +8,8 @@ import {
   Pagination,
   Select,
   TextField,
-  useTheme,
 } from "@mui/material";
 import Header from "../../components/Header/Header";
-import { tokens } from "../../theme";
 import { SearchOutlined } from "@mui/icons-material";
 import NoteItem from "../../components/NoteItem/NoteItem";
 import { useState } from "react";
@@ -24,16 +22,20 @@ function Notes({ notesData, setNotesData }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
 
-  const filteredNotes = notesData.filter((note) =>
-    note.title.toLowerCase().includes(query.toLowerCase())
-  );
+  const filteredNotes = notesData
+    .filter((note) => !note.isTrashed)
+    .filter((note) => note.title.toLowerCase().includes(query.toLowerCase()));
 
   const sortedItems = [...filteredNotes].sort((a, b) => {
-    if (sortBy === "normal") return filteredNotes;
+    if (sortBy === "normal") return 0;
     if (sortBy === "favourites") return b.isImportant - a.isImportant;
     if (sortBy === "longest") return b.title.length - a.title.length;
     return 0;
   });
+
+  const lastIndex = currentPage * itemsPerPage;
+  const firstIndex = lastIndex - itemsPerPage;
+  const currentNotes = sortedItems.slice(firstIndex, lastIndex);
 
   function handleDeleteNote(id) {
     setNotesData((notesData) =>
@@ -52,11 +54,15 @@ function Notes({ notesData, setNotesData }) {
   function handleNavigate(id) {
     navigate(`/notes/${id}`);
   }
+
   function handleSortBy(e) {
     const sortOption = e.target.value;
     setSortBy(sortOption);
   }
-  function handlePageChange(val) {}
+
+  function handlePageChange(event, value) {
+    setCurrentPage(value);
+  }
 
   return (
     <Box display="flex" flexDirection="column">
@@ -71,14 +77,12 @@ function Notes({ notesData, setNotesData }) {
               type="text"
               label="Search"
               name="search"
-              slotProps={{
-                input: {
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <SearchOutlined />
-                    </InputAdornment>
-                  ),
-                },
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <SearchOutlined />
+                  </InputAdornment>
+                ),
               }}
               sx={{ width: "50%" }}
             />
@@ -116,7 +120,7 @@ function Notes({ notesData, setNotesData }) {
           justifyItems="center"
           alignContent="center"
         >
-          {sortedItems.map(
+          {currentNotes.map(
             (item) =>
               !item.isTrashed && (
                 <NoteItem
@@ -131,12 +135,14 @@ function Notes({ notesData, setNotesData }) {
                   key={item.id}
                 />
               )
-          )}{" "}
+          )}
         </Box>
       </Box>
       <Pagination
         siblingCount={0}
-        count={Math.ceil(sortedItems.length / itemsPerPage)}
+        count={Math.ceil(
+          sortedItems.filter((note) => !note.isTrashed).length / itemsPerPage
+        )}
         sx={{ alignSelf: "center" }}
         page={currentPage}
         onChange={handlePageChange}
