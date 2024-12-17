@@ -1,14 +1,12 @@
 import {
   Box,
   Button,
-  colors,
   Select,
   TextField,
   MenuItem,
   Checkbox,
   Snackbar,
   FormControl,
-  FormLabel,
   InputLabel,
 } from "@mui/material";
 import Header from "../../components/Header/Header";
@@ -16,11 +14,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { tokens } from "../../theme";
 import { useTheme } from "@emotion/react";
-import {
-  Favorite,
-  FavoriteBorder,
-  SearchOffOutlined,
-} from "@mui/icons-material";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { useState } from "react";
 
 const initialValues = {

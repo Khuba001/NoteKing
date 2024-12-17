@@ -1,14 +1,17 @@
-import { Box, colors, Typography } from "@mui/material";
+import { Box, colors, Typography, TextField, Button } from "@mui/material";
 import { tokens, useMode } from "../../theme";
 import Header from "../../components/Header/Header";
 import NoteItem from "../../components/NoteItem/NoteItem";
 import { useTheme } from "@emotion/react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Formik } from "formik";
+import * as yup from "yup";
 
-function NoteDetails({ notesData }) {
+function NoteDetails({ currentNote }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const timeFormatted = new Date(currentNote.createdAt).toLocaleDateString();
 
   return (
     <Box>
@@ -33,7 +36,9 @@ function NoteDetails({ notesData }) {
           {/* SINGLE ROW */}
           <Box>
             <Typography variant="h5">Created At</Typography>
-            <Typography variant="h6" color={colors.grey[300]}></Typography>
+            <Typography variant="h6" color={colors.grey[300]}>
+              {timeFormatted}{" "}
+            </Typography>
           </Box>
         </Box>
       </Box>
@@ -45,9 +50,9 @@ function Note({ notesData }) {
   const navigate = useNavigate();
   let { noteId } = useParams();
   const currentNote = notesData.find((note) => note.id === noteId);
-  console.log(notesData);
-  const [theme, colorMode] = useMode();
-  const colors = tokens(theme.palette.mode);
+  function handleFormSubmit(values) {
+    console.log(values);
+  }
 
   const [openEdit, setOpenEdit] = useState(false);
 
@@ -61,24 +66,31 @@ function Note({ notesData }) {
 
   return (
     <Box display="flex">
-      <Box width="50%">
-        <Header title={"EDIT YOUR NOTE"} />
+      {openEdit ? (
+        <Box width="50%">
+          <Header title={"EDIT YOUR NOTE"} />
 
-        <NoteItem
-          name={"Guest"}
-          title={currentNote.title}
-          category={currentNote.category}
-          description={currentNote.description}
-          btn1={"BACK"}
-          OnClickBtn1={handleBack}
-          btn2={openEdit ? "SAVE" : "EDIT"}
-          size={1.2}
-          OnClickBtn2={handleEditMode}
-        />
-      </Box>
+          <NoteItem
+            name={"Guest"}
+            title={currentNote.title}
+            category={currentNote.category}
+            description={currentNote.description}
+            btn1={"BACK"}
+            OnClickBtn1={handleBack}
+            btn2={openEdit ? "SAVE" : "EDIT"}
+            size={1.2}
+            OnClickBtn2={handleEditMode}
+          />
+        </Box>
+      ) : (
+        <Box width="50%">
+          <Header title={"EDIT YOUR NOTE"} />
+          <Formik></Formik>
+        </Box>
+      )}
       <Box>
         <Header title={"DETAILS"} />
-        <NoteDetails />
+        <NoteDetails currentNote={currentNote} />
       </Box>
     </Box>
   );
