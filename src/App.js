@@ -35,7 +35,9 @@ function App() {
               />
               <Route
                 path="/notes/:noteId/"
-                element={<Note notesData={notesData} />}
+                element={
+                  <Note notesData={notesData} setNotesData={setNotesData} />
+                }
               />
               <Route
                 path="/trash"

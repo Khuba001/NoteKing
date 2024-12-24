@@ -58,12 +58,16 @@ function NoteDetails({ currentNote }) {
   );
 }
 
-function Note({ notesData }) {
+function Note({ notesData, setNotesData }) {
   const navigate = useNavigate();
   let { noteId } = useParams();
   const currentNote = notesData.find((note) => note.id === noteId);
   function handleFormSubmit(values) {
-    console.log(values);
+    const updatedNotes = notesData.map((note) =>
+      note.id === currentNote.id ? { ...note, ...values } : note
+    );
+    setNotesData(updatedNotes);
+    setOpenEdit(false);
   }
 
   const initialValues = {
