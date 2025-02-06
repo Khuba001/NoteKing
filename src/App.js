@@ -19,8 +19,15 @@ function App() {
         <CssBaseline />
         <div className="app">
           <Navbar />
+
           <main className="content">
             <Routes>
+              <Route
+                index
+                element={
+                  <Notes notesData={notesData} setNotesData={setNotesData} />
+                }
+              />
               <Route
                 path="/add"
                 element={

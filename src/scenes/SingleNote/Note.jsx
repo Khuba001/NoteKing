@@ -42,14 +42,14 @@ function NoteDetails({ currentNote }) {
           <Box>
             <Typography variant="h5">Last edit</Typography>
             <Typography variant="h6" color={colors.grey[300]}>
-              This note hasn't been edited yet
+              {currentNote.editedAt}
             </Typography>
           </Box>
           {/* SINGLE ROW */}
           <Box>
             <Typography variant="h5">Created At</Typography>
             <Typography variant="h6" color={colors.grey[300]}>
-              {timeFormatted}{" "}
+              {timeFormatted}
             </Typography>
           </Box>
         </Box>
@@ -64,7 +64,13 @@ function Note({ notesData, setNotesData }) {
   const currentNote = notesData.find((note) => note.id === noteId);
   function handleFormSubmit(values) {
     const updatedNotes = notesData.map((note) =>
-      note.id === currentNote.id ? { ...note, ...values } : note
+      note.id === currentNote.id
+        ? {
+            ...note,
+            ...values,
+            editedAt: new Date().toLocaleDateString(),
+          }
+        : note
     );
     setNotesData(updatedNotes);
     setOpenEdit(false);

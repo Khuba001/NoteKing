@@ -41,7 +41,7 @@ const Navbar = () => {
 
   return (
     <Box height="100vh" display="flex">
-      <Sidebar collapsed={isCollapsed} backgroundColor={colors.primary[400]}>
+      <Sidebar collapsed={isCollapsed} backgroundColor={colors.primary[800]}>
         <Box
           display="flex"
           flexDirection="column"
@@ -52,9 +52,8 @@ const Navbar = () => {
             iconShape="square"
             rootStyles={{
               ["." + menuClasses.button]: {
-                backgroundColor: `${colors.primary[400]}`,
                 "&:hover": {
-                  backgroundColor: `#4d5770`,
+                  border: `1px solid ${colors.primary[800]}`,
                 },
               },
             }}
@@ -122,9 +121,8 @@ const Navbar = () => {
           <Menu
             rootStyles={{
               ["." + menuClasses.button]: {
-                backgroundColor: `${colors.primary[400]}`,
                 "&:hover": {
-                  backgroundColor: `#4d5770`,
+                  backgroundColor: colors.primary[700],
                 },
               },
             }}

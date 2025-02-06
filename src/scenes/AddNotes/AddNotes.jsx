@@ -23,6 +23,7 @@ const initialValues = {
   category: "life",
   isImportant: false,
   isTrashed: false,
+  editedAt: null,
 };
 
 const noteSchema = yup.object().shape({
