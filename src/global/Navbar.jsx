@@ -110,6 +110,7 @@ const Navbar = () => {
                     variant="h2"
                     style={{
                       color: `${colors.grey[100]}`,
+                      fontWeight: "bold",
                     }}
                   >
                     NOTEKING

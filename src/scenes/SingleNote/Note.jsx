@@ -60,6 +60,8 @@ function NoteDetails({ currentNote }) {
 }
 
 function Note({ notesData, setNotesData }) {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
   let { noteId } = useParams();
   const currentNote = notesData.find((note) => note.id === noteId);
@@ -216,18 +218,37 @@ function Note({ notesData, setNotesData }) {
                     type="submit"
                     color="secondary"
                     variant="contained"
-                    sx={{ width: "20%", padding: "8px 8px" }}
-                    style={{ fontSize: "14px", fontWeight: "bold" }}
+                    sx={{
+                      width: "20%",
+                      padding: "8px 8px",
+                      "&:hover": {
+                        backgroundColor: colors.blueAccent[500],
+                      },
+                    }}
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "bold",
+                    }}
                   >
                     Save
                   </Button>
                   <Button
                     type="submit"
                     color="secondary"
-                    variant="contained"
-                    sx={{ width: "20%", padding: "8px 8px" }}
+                    variant="outlined"
+                    sx={{
+                      width: "20%",
+                      padding: "8px 8px",
+                      "&:hover": {
+                        borderColor: colors.blueAccent[500],
+                        color: colors.blueAccent[500],
+                      },
+                    }}
                     onClick={() => setOpenEdit(!openEdit)}
-                    style={{ fontSize: "14px", fontWeight: "bold" }}
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "bold",
+                    }}
                   >
                     Cancel
                   </Button>

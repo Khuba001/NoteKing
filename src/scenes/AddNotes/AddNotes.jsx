@@ -162,7 +162,13 @@ const AddNotes = ({ notesData, setNotesData }) => {
                 type="submit"
                 color="secondary"
                 variant="contained"
-                sx={{ width: "10%", padding: "16px 16px" }}
+                sx={{
+                  width: "10%",
+                  padding: "14px 14px",
+                  "&:hover": {
+                    backgroundColor: colors.blueAccent[500],
+                  },
+                }}
                 style={{ fontSize: "14px", fontWeight: "bold" }}
               >
                 Add New Note

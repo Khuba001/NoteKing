@@ -66,6 +66,11 @@ function NoteItem({
             variant="contained"
             size="large"
             type="button"
+            sx={{
+              "&:hover": {
+                backgroundColor: colors.blueAccent[500],
+              },
+            }}
             style={{ fontSize: "14px", fontWeight: "bold" }}
             onClick={OnClickBtn1}
           >
@@ -79,6 +84,12 @@ function NoteItem({
             size="large"
             type="button"
             onClick={OnClickBtn2}
+            sx={{
+              "&:hover": {
+                borderColor: colors.blueAccent[500],
+                color: colors.blueAccent[500],
+              },
+            }}
             style={{ fontSize: "14px", fontWeight: "bold" }}
           >
             {btn2}

@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  colors,
   FormControl,
   InputAdornment,
   InputLabel,
@@ -14,6 +15,8 @@ import { SearchOutlined } from "@mui/icons-material";
 import NoteItem from "../../components/NoteItem/NoteItem";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "@emotion/react";
+import { tokens } from "../../theme";
 
 function Notes({ notesData, setNotesData }) {
   const navigate = useNavigate();
@@ -21,6 +24,8 @@ function Notes({ notesData, setNotesData }) {
   const [sortBy, setSortBy] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   const filteredNotes = notesData
     .filter((note) => !note.isTrashed)
@@ -108,7 +113,14 @@ function Notes({ notesData, setNotesData }) {
               variant="contained"
               size="large"
               onClick={handleDeleteAll}
-              sx={{ width: "10%" }}
+              sx={{
+                width: "10%",
+                fontSize: "14px",
+                fontWeight: "bold",
+                "&:hover": {
+                  backgroundColor: colors.blueAccent[500],
+                },
+              }}
             >
               Trash all
             </Button>
