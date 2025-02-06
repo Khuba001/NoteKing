@@ -1,1 +1,1 @@
-(public\imgs\Github.png)
+![Alt text](public\imgs\Github.png)
