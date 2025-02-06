@@ -1,1 +1,1 @@
-![Alt text](Github.png)
+![page preview](public/imgs/Github.png)
