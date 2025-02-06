@@ -7,14 +7,14 @@ function Header({ title, subheading }) {
   return (
     <Box mb="30px">
       <Typography
-        variant="h2"
+        variant="h1"
         color={colors.grey[100]}
         fontWeight="bold"
         sx={{ mb: "5px" }}
       >
         {title}
       </Typography>
-      <Typography variant="h5" color={colors.blueAccent[500]}>
+      <Typography variant="h4" color={colors.blueAccent[500]}>
         {subheading}
       </Typography>
     </Box>

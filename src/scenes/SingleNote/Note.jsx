@@ -31,24 +31,25 @@ function NoteDetails({ currentNote }) {
       <Box
         display="flex"
         flexDirection="column"
-        border="1px solid #7777"
+        border="3px solid"
+        borderColor={colors.primary[600]}
         borderRadius="9px"
         padding="20px 16px"
         mt="56px"
-        sx={{ backgroundColor: colors.primary[400] }}
+        sx={{ backgroundColor: colors.primary[800] }}
       >
         <Box display="flex" flexDirection="column" gap="14px">
           {/* SINGLE ROW */}
           <Box>
-            <Typography variant="h5">Last edit</Typography>
-            <Typography variant="h6" color={colors.grey[300]}>
+            <Typography variant="h4">Last edit</Typography>
+            <Typography variant="h5" color={colors.grey[300]}>
               {currentNote.editedAt}
             </Typography>
           </Box>
           {/* SINGLE ROW */}
           <Box>
-            <Typography variant="h5">Created At</Typography>
-            <Typography variant="h6" color={colors.grey[300]}>
+            <Typography variant="h4">Created At</Typography>
+            <Typography variant="h5" color={colors.grey[300]}>
               {timeFormatted}
             </Typography>
           </Box>
@@ -216,6 +217,7 @@ function Note({ notesData, setNotesData }) {
                     color="secondary"
                     variant="contained"
                     sx={{ width: "20%", padding: "8px 8px" }}
+                    style={{ fontSize: "14px", fontWeight: "bold" }}
                   >
                     Save
                   </Button>
@@ -225,6 +227,7 @@ function Note({ notesData, setNotesData }) {
                     variant="contained"
                     sx={{ width: "20%", padding: "8px 8px" }}
                     onClick={() => setOpenEdit(!openEdit)}
+                    style={{ fontSize: "14px", fontWeight: "bold" }}
                   >
                     Cancel
                   </Button>

@@ -22,13 +22,14 @@ function NoteItem({
       display="flex"
       flexDirection="column"
       width="80%"
-      border="1px solid #7777"
+      border="3px solid "
+      borderColor={colors.primary[600]}
       borderRadius="9px"
       padding="20px 16px"
       gap="24px"
       mt="56px"
       sx={{
-        backgroundColor: colors.primary[400],
+        backgroundColor: colors.primary[800],
         transform: `scale(${size})`,
         transformOrigin: "left",
         transition: "transform 0.3s ease",
@@ -38,7 +39,7 @@ function NoteItem({
         <Typography variant="h4">{name}</Typography>
 
         <Typography
-          variant="h5"
+          variant="h4"
           borderLeft="1px solid #7777 "
           paddingLeft="10px"
         >
@@ -53,18 +54,19 @@ function NoteItem({
         padding="14px"
         gap="4px"
       >
-        <Typography variant="h5" color={colors.grey[300]}>
+        <Typography variant="h4" color={colors.grey[300]}>
           {category}
         </Typography>
-        <Typography>{description}</Typography>
+        <Typography variant="h5">{description}</Typography>
       </Box>
       <Box display="flex" gap="14px">
         {btn1 && (
           <Button
             color="secondary"
             variant="contained"
-            size="medium"
+            size="large"
             type="button"
+            style={{ fontSize: "14px", fontWeight: "bold" }}
             onClick={OnClickBtn1}
           >
             {btn1}
@@ -74,9 +76,10 @@ function NoteItem({
           <Button
             color="secondary"
             variant="outlined"
-            size="medium"
+            size="large"
             type="button"
             onClick={OnClickBtn2}
+            style={{ fontSize: "14px", fontWeight: "bold" }}
           >
             {btn2}
           </Button>

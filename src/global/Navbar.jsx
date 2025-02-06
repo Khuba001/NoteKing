@@ -10,9 +10,9 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useContext, useState } from "react";
 import { ColorModeContext, tokens } from "../theme";
 import { Sidebar, Menu, MenuItem, menuClasses } from "react-pro-sidebar";
-import { DarkModeOutlined, LightModeOutlined } from "@mui/icons-material";
+import { DarkModeOutlined, Padding } from "@mui/icons-material";
 
-const Item = ({ title, to, icon, isSelected, setIsSelected }) => {
+const ItemFull = ({ title, to, icon, isSelected, setIsSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -20,15 +20,41 @@ const Item = ({ title, to, icon, isSelected, setIsSelected }) => {
     <MenuItem
       component={<Link />}
       to={to}
-      style={{
-        margin: "10px 0 10px 0",
-      }}
       active={isSelected === title}
       onClick={() => setIsSelected(title)}
       icon={icon}
+      style={{ color: colors.grey[300] }}
+      rootStyles={{
+        ["." + menuClasses]: {
+          "&:hover": {
+            color: colors.grey[100],
+          },
+        },
+      }}
     >
-      <Typography variant="h5">{title}</Typography>
+      <Typography variant="h4">{title}</Typography>
     </MenuItem>
+  );
+};
+
+const ItemShort = ({ title, to, icon, isSelected, setIsSelected }) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
+  return (
+    <MenuItem
+      component={<Link />}
+      to={to}
+      active={isSelected === title}
+      onClick={() => setIsSelected(title)}
+      icon={icon}
+      rootStyles={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: colors.grey[300],
+      }}
+    ></MenuItem>
   );
 };
 
@@ -41,7 +67,12 @@ const Navbar = () => {
 
   return (
     <Box height="100vh" display="flex">
-      <Sidebar collapsed={isCollapsed} backgroundColor={colors.primary[800]}>
+      {/* Sidebar */}
+      <Sidebar
+        collapsed={isCollapsed}
+        backgroundColor={colors.primary[800]}
+        style={{ border: "unset" }}
+      >
         <Box
           display="flex"
           flexDirection="column"
@@ -50,10 +81,12 @@ const Navbar = () => {
         >
           <Menu
             iconShape="square"
-            rootStyles={{
-              ["." + menuClasses.button]: {
-                "&:hover": {
-                  border: `1px solid ${colors.primary[800]}`,
+            menuItemStyles={{
+              button: {
+                [`&:hover`]: {
+                  backgroundColor: colors.primary[800],
+                  border: `2px solid ${colors.primary[700]}`,
+                  borderRadius: "9px",
                 },
               },
             }}
@@ -62,17 +95,19 @@ const Navbar = () => {
             <MenuItem
               onClick={() => setIsCollapsed(!isCollapsed)}
               icon={isCollapsed ? <ArrowForwardIcon /> : undefined}
-              style={{ margin: "10px 0 20px 0" }}
+              style={{
+                border: "none",
+                margin: "24px 0 96px 0",
+              }}
             >
               {!isCollapsed && (
                 <Box
                   display="flex"
                   justifyContent="space-between"
                   alignItems="center"
-                  ml="15px"
                 >
                   <Typography
-                    variant="h3"
+                    variant="h2"
                     style={{
                       color: `${colors.grey[100]}`,
                     }}
@@ -86,58 +121,108 @@ const Navbar = () => {
               )}
             </MenuItem>
             {/* ELEMENTY MENU */}
-            <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-              <Item
-                isSelected={isSelected}
-                setIsSelected={setIsSelected}
-                title={"Add"}
-                icon={<AddModeratorIcon />}
-                to={"/add"}
-              />
-              <Item
-                isSelected={isSelected}
-                setIsSelected={setIsSelected}
-                title={"Notes"}
-                icon={<FormatListBulletedIcon />}
-                to={"/notes"}
-              />
-              <Item
-                isSelected={isSelected}
-                setIsSelected={setIsSelected}
-                title={"Trash"}
-                icon={<DeleteOutlineIcon />}
-                to={"/trash"}
-              />
-              <Item
-                isSelected={isSelected}
-                setIsSelected={setIsSelected}
-                title={"Important"}
-                icon={<FavoriteBorderIcon />}
-                to={"/important"}
-              />
-            </Box>
+            {/* COLLAPSED ICONS */}
+            {isCollapsed ? (
+              <Box
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "12px",
+                }}
+              >
+                <ItemShort
+                  isSelected={isSelected}
+                  setIsSelected={setIsSelected}
+                  icon={<AddModeratorIcon />}
+                  to={"/add"}
+                />
+                <ItemShort
+                  isSelected={isSelected}
+                  setIsSelected={setIsSelected}
+                  icon={<FormatListBulletedIcon />}
+                  to={"/notes"}
+                />
+                <ItemShort
+                  isSelected={isSelected}
+                  setIsSelected={setIsSelected}
+                  icon={<DeleteOutlineIcon />}
+                  to={"/trash"}
+                />
+                <ItemShort
+                  isSelected={isSelected}
+                  setIsSelected={setIsSelected}
+                  icon={<FavoriteBorderIcon />}
+                  to={"/important"}
+                />
+              </Box>
+            ) : (
+              // EXTENDED MENU
+              <Box
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  padding: "0 12px",
+                  gap: "12px",
+                }}
+              >
+                <ItemFull
+                  isSelected={isSelected}
+                  setIsSelected={setIsSelected}
+                  title={"Add"}
+                  icon={<AddModeratorIcon />}
+                  to={"/add"}
+                />
+                <ItemFull
+                  isSelected={isSelected}
+                  setIsSelected={setIsSelected}
+                  title={"Notes"}
+                  icon={<FormatListBulletedIcon />}
+                  to={"/notes"}
+                />
+                <ItemFull
+                  isSelected={isSelected}
+                  setIsSelected={setIsSelected}
+                  title={"Trash"}
+                  icon={<DeleteOutlineIcon />}
+                  to={"/trash"}
+                />
+                <ItemFull
+                  isSelected={isSelected}
+                  setIsSelected={setIsSelected}
+                  title={"Important"}
+                  icon={<FavoriteBorderIcon />}
+                  to={"/important"}
+                />
+              </Box>
+            )}
           </Menu>
           {/* THEME SWITCH */}
           <Menu
             rootStyles={{
               ["." + menuClasses.button]: {
                 "&:hover": {
-                  backgroundColor: colors.primary[700],
+                  backgroundColor: "unset",
                 },
               },
             }}
             iconShape="square"
             style={{
-              marginBottom: "10px",
+              marginBottom: "30px",
             }}
           >
             <MenuItem
               icon={
                 isCollapsed ? (
                   theme.palette.mode === "light" ? (
-                    <LightModeOutlinedIcon />
+                    <LightModeOutlinedIcon
+                      onClick={colorMode.toggleColorMode}
+                    />
                   ) : (
-                    <DarkModeOutlined />
+                    <DarkModeOutlined onClick={colorMode.toggleColorMode} />
                   )
                 ) : undefined
               }

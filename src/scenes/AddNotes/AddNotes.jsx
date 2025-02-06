@@ -86,8 +86,9 @@ const AddNotes = ({ notesData, setNotesData }) => {
               display="flex"
               flexDirection="column"
               gap="2rem"
-              sx={{ width: "50%", backgroundColor: colors.primary[400] }}
-              border="1px solid #7777"
+              sx={{ width: "50%", backgroundColor: colors.primary[800] }}
+              border="3px solid"
+              borderColor={colors.primary[600]}
               borderRadius="9px"
               padding="20px 16px
               "
@@ -162,6 +163,7 @@ const AddNotes = ({ notesData, setNotesData }) => {
                 color="secondary"
                 variant="contained"
                 sx={{ width: "10%", padding: "16px 16px" }}
+                style={{ fontSize: "14px", fontWeight: "bold" }}
               >
                 Add New Note
               </Button>
